@@ -111,25 +111,52 @@ sirenBtn.addEventListener("click", () => {
 });
 
 // Flashlight: screen-based (not hardware torch)
-flashBtn.addEventListener("click", () => {
-  const body = document.body;
-  const flashOn = body.classList.toggle("flash-on");
 
-  if (flashOn) {
-    flashOverlay.classList.add("active");
-    speakIfEnabled("Flashlight is on. Tap the button to turn it off.");
-  } else {
-    flashOverlay.classList.remove("active");
-    speakIfEnabled("Flashlight turned off.");
-  }
-});
+let blinkStream;
+let blinking = false;
+let blinkTrack;
 
-flashOffBtn.addEventListener("click", () => {
-  document.body.classList.remove("flash-on");
-  flashOverlay.classList.remove("active");
-  speakIfEnabled("Flashlight turned off.");
-});
+async function toggleBlinkFlashlight() {
+    try {
+        if (!blinking) {
+            // Turn blinking ON
+            blinking = true;
 
+            blinkStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: "environment", torch: true }
+            });
+
+            blinkTrack = blinkStream.getVideoTracks()[0];
+
+            // Start blinking loop
+            blinkFlash();
+
+            alert("Blinking Flashlight ON 🔦⚡");
+        } else {
+            // Turn blinking OFF
+            blinking = false;
+
+            blinkStream.getTracks().forEach(track => track.stop());
+            blinkStream = null;
+            blinkTrack = null;
+
+            alert("Blinking Flashlight OFF");
+        }
+    } catch (err) {
+        alert("Blinking flashlight not supported on this device.");
+        console.error(err);
+    }
+}
+
+async function blinkFlash() {
+    while (blinking && blinkTrack) {
+        await blinkTrack.applyConstraints({ advanced: [{ torch: true }] });
+        await new Promise(r => setTimeout(r, 200)); // ON for 200ms
+
+        await blinkTrack.applyConstraints({ advanced: [{ torch: false }] });
+        await new Promise(r => setTimeout(r, 200)); // OFF for 200ms
+    }
+}
 // Voice guide toggle
 voiceBtn.addEventListener("click", () => {
   voiceEnabled = !voiceEnabled;
