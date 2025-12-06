@@ -1,1 +1,278 @@
+/* ========= GLOBAL ========= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #ffe8ff 0, #fdf5ff 35%, #f3f8ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b1b3f;
+}
+
+/* Flash overlay (screen blink) */
+#flashOverlay {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+#flashOverlay.flashing {
+  animation: flashBlink 0.4s infinite;
+}
+
+@keyframes flashBlink {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.page-wrap {
+  width: 100%;
+  max-width: 480px;
+  padding: 16px;
+}
+
+/* ========= CARD ========= */
+.card {
+  background: linear-gradient(145deg, #ffffff, #fef3ff);
+  border-radius: 28px;
+  box-shadow:
+    0 18px 40px rgba(159, 99, 255, 0.20),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
+  padding: 20px 20px 28px;
+}
+
+/* ========= HEADER ========= */
+.app-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.logo-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  background: radial-gradient(circle at 30% 30%, #ffe6ff, #f2e8ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 12px 30px rgba(126, 63, 255, 0.25),
+    0 0 0 3px rgba(255, 255, 255, 0.9);
+}
+
+.logo-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.app-title {
+  font-size: 2.1rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 6px;
+  color: #36204f;
+}
+
+.tagline {
+  font-size: 0.92rem;
+  color: #664578;
+  margin-bottom: 4px;
+}
+
+.credit {
+  font-size: 0.95rem;
+  color: #8a5aa8;
+  margin-bottom: 8px;
+}
+.credit span {
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+/* ========= STATUS ========= */
+.status-section {
+  background: linear-gradient(135deg, #fdf5ff, #fff);
+  border-radius: 18px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(173, 130, 255, 0.25);
+}
+
+#statusText {
+  font-size: 0.9rem;
+  color: #5a3d75;
+}
+
+/* ========= SECTIONS ========= */
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+  color: #3b2155;
+}
+
+.section-sub {
+  font-size: 0.84rem;
+  color: #7b588e;
+  margin-bottom: 10px;
+}
+
+/* ========= BUTTONS ========= */
+.button-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+  color: #2b143b;
+  box-shadow:
+    0 10px 22px rgba(131, 76, 255, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.97);
+}
+
+/* Individual button colors */
+.btn-sos {
+  background: linear-gradient(135deg, #ff6f8d, #ffb06a);
+  color: #2b0c21;
+}
+
+.btn-voice {
+  background: linear-gradient(135deg, #c075ff, #7a7bff);
+  color: #fdfbff;
+}
+
+.btn-flash {
+  background: linear-gradient(135deg, #ffe08c, #ffc973);
+}
+
+.btn-location {
+  background: linear-gradient(135deg, #7de0ff, #9fafff);
+  color: #11213b;
+}
+
+.btn-police {
+  background: linear-gradient(135deg, #ff9ca9, #ff6bb5);
+  color: #2b0b21;
+}
+
+.btn-save {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #9cf0c7, #7cd8ff);
+}
+
+/* ========= CONTACTS ========= */
+.contacts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-block {
+  background: #f8f2ff;
+  border-radius: 16px;
+  padding: 10px 12px;
+  border: 1px solid rgba(140, 103, 255, 0.23);
+}
+
+.contact-block h3 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: #4d2c6e;
+}
+
+.contact-block label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  color: #6f4a86;
+}
+
+.contact-block input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(155, 116, 255, 0.4);
+  padding: 7px 9px;
+  margin-top: 2px;
+  font-size: 0.9rem;
+  outline: none;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* ========= TIPS ========= */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tip-card {
+  background: #fdf9ff;
+  border-radius: 16px;
+  padding: 9px 11px;
+  border: 1px solid rgba(188, 146, 255, 0.3);
+}
+
+.tip-card h3 {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  color: #4b2f6b;
+}
+
+.tip-card p {
+  font-size: 0.82rem;
+  color: #6c4d85;
+}
+
+/* ========= FOOTER ========= */
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 14px;
+  color: #7a548f;
+}
+
+/* Small screens tweaks */
+@media (max-width: 380px) {
+  .logo-circle {
+    width: 150px;
+    height: 150px;
+  }
+  .logo-img {
+    width: 125px;
+    height: 125px;
+  }
+  .app-title {
+    font-size: 1.8rem;
+  }
+}
