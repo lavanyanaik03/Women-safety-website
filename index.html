@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Women Safety Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+    <!-- LOGO -->
+    <div class="logo-container">
+        <img src="Lavanya-logo.png" alt="Women Safety Logo" class="logo">
+    </div>
 
     <h1>Women Safety Website</h1>
 
-    <button onclick="sendSOS()">🚨 SEND SOS</button>
-    <button onclick="trackLocation()">📍 Track My Location</button>
+    <!-- SOS BUTTON -->
+    <button id="sosBtn">🚨 SEND SOS</button>
 
-    <br><br>
-    <a href="#">💪 Self Defense Tips</a>
+    <!-- TRACK LOCATION BUTTON -->
+    <button id="trackBtn">📍 Track My Location</button>
+
+    <!-- SELF DEFENSE TIPS -->
+    <a href="#" id="tipsLink">💪 Self Defense Tips</a>
+
+    <!-- VOICE ASSISTANT BUTTON -->
+    <button id="voiceBtn">🎤 Voice Assistant</button>
+
+    <!-- EMERGENCY CONTACTS -->
+    <button id="contactsBtn">📞 Emergency Contacts</button>
+
+    <!-- FOOTER -->
+    <footer>
+        Made by <strong>Lavanya Naik</strong>
+    </footer>
+
+    <audio id="sirenSound" src="siren.mp3"></audio>
 
     <script src="script.js"></script>
 </body>
