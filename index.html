@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SafeHer – Women Safety</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="hero">
+            <img src="Lavanya-logo.png" alt="SafeHer Logo" class="logo" />
+            <h1 class="app-title">SafeHer</h1>
+            <p class="tagline">Your personal women safety companion</p>
+            <p class="credit">
+                Designed &amp; Developed by
+                <span class="lavanya-name">Lavanya Naik</span>
+            </p>
+        </header>
+
+        <main>
+            <!-- QUICK ACTIONS -->
+            <section class="card main-actions">
+                <h2>Quick Actions</h2>
+                <button id="sosBtn" class="btn btn-sos">
+                    ⚠️ Send SOS
+                </button>
+                <button id="voiceSosBtn" class="btn btn-voice">
+                    🎤 Voice SOS (say “help me”)
+                </button>
+                <button id="flashBtn" class="btn btn-flash">
+                    ✨ Flash Alert
+                </button>
+                <p class="hint">
+                    Tip: Use SOS or Voice SOS in real emergency only.
+                </p>
+            </section>
+
+            <!-- LOCATION SHARE -->
+            <section class="card">
+                <h2>Share Live Location</h2>
+                <p>
+                    This will get your GPS location and open WhatsApp with a
+                    message that you can send to your emergency contact.
+                </p>
+                <button id="shareLocationBtn" class="btn btn-primary">
+                    📍 Share My Location
+                </button>
+                <p id="locationStatus" class="status-text"></p>
+            </section>
+
+            <!-- EMERGENCY CONTACTS -->
+            <section class="card">
+                <h2>Emergency Contacts</h2>
+                <p>
+                    These call buttons use your phone dialer. Set the numbers
+                    once in the code and they will work quickly.
+                </p>
+                <div class="contact-buttons">
+                    <a id="callContact1" class="btn btn-outline" href="tel:">
+                        ☎️ Call Contact 1
+                    </a>
+                    <a id="callContact2" class="btn btn-outline" href="tel:">
+                        ☎️ Call Contact 2
+                    </a>
+                    <a id="callPolice" class="btn btn-police" href="tel:112">
+                        🚨 Call Police (112)
+                    </a>
+                </div>
+                <p class="hint">
+                    You can change numbers inside <code>script.js</code>.
+                </p>
+            </section>
+
+            <!-- SELF DEFENCE TIPS -->
+            <section class="card">
+                <h2>Self-Defence Tips</h2>
+                <p>Tap the button to show or hide quick safety tips.</p>
+                <button id="tipsBtn" class="btn btn-outline">
+                    🛡️ Show Tips
+                </button>
+                <ul id="tipsList" class="tips hidden">
+                    <li>Stay aware of your surroundings, avoid distractions.</li>
+                    <li>Trust your instincts – if it feels unsafe, leave.</li>
+                    <li>Keep your phone charged and within easy reach.</li>
+                    <li>Share your location and route with someone you trust.</li>
+                    <li>In danger, move towards a crowd or well-lit area.</li>
+                    <li>Know local emergency numbers (like 112).</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>
+                SafeHer • Built with care for women’s safety<br />
+                <span class="lavanya-footer">Designed &amp; Developed by
+                    <strong>Lavanya Naik</strong></span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- SIREN AUDIO -->
+    <audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
