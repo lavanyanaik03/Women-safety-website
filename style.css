@@ -141,3 +141,12 @@ footer {
   50% { transform: translateY(-10px) scale(1.03); }
   100% { transform: translateY(0) scale(1); }
 }
+/* SCREEN BLINK MODE */
+.blink-active {
+  animation: screenBlink 0.4s infinite alternate;
+}
+
+@keyframes screenBlink {
+  from { background: #000; }
+  to { background: #ffb3d9; }
+}
