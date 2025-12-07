@@ -195,21 +195,6 @@ input {
   margin-bottom: 6px;
 }
 
-/* Screen flash overlay */
-#screenFlashOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 9999;
-}
-
-#screenFlashOverlay.active {
-  pointer-events: none;
-  opacity: 1;
-}
 
 /* Footer already styled above */
 
