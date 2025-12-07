@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SafeHer – Women Safety</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- TOP CREDIT -->
+<p class="top-credit">Designed & Developed by <span class="lavanya">LAVANYA NAIK</span></p>
+
+<!-- LOGO -->
+<div class="logo-container">
+    <img src="lavanya-logo.png" class="main-logo" alt="App Logo" />
+</div>
+
+<!-- TITLE -->
+<h1 class="app-title">SAFEHER</h1>
+<p class="subtitle">Your Personal Women’s Safety Companion</p>
+
+<!-- QUICK ACTIONS -->
+<div class="card">
+<h2>Quick Actions</h2>
+
+<button class="btn btn-sos" id="sosBtn">⚠️ Send SOS (WhatsApp)</button>
+
+<button class="btn btn-voice" id="voiceSosBtn">🎙️ Voice SOS (Say “help me”)</button>
+
+<button class="btn btn-screen" id="screenBlinkBtn">🌌 Screen Blink</button>
+
+<button class="btn btn-flash" id="torchFlashBtn">🔦 Camera Flash</button>
+
+<button class="btn btn-siren" id="sirenBtn">📢 Siren Alarm</button>
+
+<button class="btn btn-location" id="locationBtn">📍 Share Location</button>
+
+<button class="btn btn-police" id="policeBtn">🚨 Call Police (112)</button>
+
+<button class="btn btn-voice-toggle" id="voiceToggleBtn">🔊 Voice Guide: ON</button>
+</div>
+
+<!-- EMERGENCY CONTACTS -->
+<div class="card">
+<h2>Emergency Contacts</h2>
+
+<label>Dad</label>
+<input type="text" id="c1Name" placeholder="Dad" />
+<label>Phone Number</label>
+<input type="tel" id="c1Phone" placeholder="9198xxxxxxx" />
+
+<label>Mom</label>
+<input type="text" id="c2Name" placeholder="Mom" />
+<label>Phone Number</label>
+<input type="tel" id="c2Phone" placeholder="9197xxxxxxx" />
+
+<label>Brother / Sister</label>
+<input type="text" id="c3Name" placeholder="Brother / Sister" />
+<label>Phone Number</label>
+<input type="tel" id="c3Phone" placeholder="9199xxxxxxx" />
+
+<button class="btn btn-save" id="saveContactsBtn">💾 Save Contacts</button>
+</div>
+
+<!-- SELF-DEFENSE TIPS -->
+<div class="card">
+<h2>Self-Defense Tips</h2>
+<ol class="tips">
+<li>Stay aware of your surroundings.</li>
+<li>Trust your instincts.</li>
+<li>Keep emergency tools ready.</li>
+<li>Use your voice loudly.</li>
+<li>Target sensitive areas and escape.</li>
+</ol>
+
+<button class="btn btn-read" id="readTipsBtn">📖 Read Tips</button>
+</div>
+
+<!-- BOTTOM CREDIT -->
+<footer class="footer">
+Designed & Developed by <span class="lavanya">LAVANYA NAIK</span>
+</footer>
+
+<!-- AUDIO -->
+<audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
