@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeHer – Women Safety Companion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="logo-wrap">
+        <img src="lavanya-logo.png" alt="SafeHer Logo" class="logo" />
+      </div>
+      <h1 class="app-title">SAFEHER</h1>
+      <p class="tagline">Your personal women’s safety companion.</p>
+      <p class="byline">
+        Designed &amp; Developed by
+        <span class="lavanya">Lavanya Naik</span>
+      </p>
+      <p id="status" class="status" aria-live="polite"></p>
+    </header>
+
+    <main>
+      <!-- Quick Actions -->
+      <section class="card">
+        <h2>Quick Actions</h2>
+        <p class="helper-text">
+          Use these buttons quickly in any emergency situation.
+        </p>
+
+        <div class="button-grid">
+          <button id="sosBtn" class="btn btn-sos">
+            ⚠️ Send SOS (WhatsApp)
+          </button>
+
+          <button id="voiceSosBtn" class="btn btn-voice-sos">
+            🎙️ Voice SOS (say “help me”)
+          </button>
+
+          <button id="screenFlashBtn" class="btn btn-screen-flash">
+            ✨ Screen Blink Alert
+          </button>
+
+          <button id="torchFlashBtn" class="btn btn-torch-flash">
+            🔦 Camera Flash Alert
+          </button>
+
+          <button id="sirenBtn" class="btn btn-siren">
+            🔊 Siren Alarm
+          </button>
+
+          <button id="locationBtn" class="btn btn-location">
+            📍 Share My Location
+          </button>
+
+          <button id="policeBtn" class="btn btn-police">
+            🚔 Call Police (112)
+          </button>
+        </div>
+
+        <div class="voice-toggle-wrap">
+          <button id="voiceToggleBtn" class="btn btn-voice-toggle">
+            🔈 Voice Guide: ON
+          </button>
+          <p class="tiny-tip">
+            Voice guide will read buttons, status and self-defense tips aloud.
+          </p>
+        </div>
+      </section>
+
+      <!-- Emergency Contacts -->
+      <section class="card">
+        <h2>Emergency Contacts</h2>
+        <p class="helper-text">
+          Save important numbers so your SOS and location can reach them quickly.
+        </p>
+
+        <div class="contact-group">
+          <h3>Contact 1 (Primary)</h3>
+          <label>
+            Name
+            <input id="c1Name" type="text" placeholder="e.g., Dad" />
+          </label>
+          <label>
+            Phone (with country code)
+            <input id="c1Phone" type="tel" placeholder="e.g., 9198xxxxxxx" />
+          </label>
+        </div>
+
+        <div class="contact-group">
+          <h3>Contact 2</h3>
+          <label>
+            Name
+            <input id="c2Name" type="text" placeholder="e.g., Mom" />
+          </label>
+          <label>
+            Phone (with country code)
+            <input id="c2Phone" type="tel" placeholder="e.g., 9197xxxxxxx" />
+          </label>
+        </div>
+
+        <div class="contact-group">
+          <h3>Contact 3</h3>
+          <label>
+            Name
+            <input id="c3Name" type="text" placeholder="e.g., Brother / Sister" />
+          </label>
+          <label>
+            Phone (with country code)
+            <input id="c3Phone" type="tel" placeholder="e.g., 9199xxxxxxx" />
+          </label>
+        </div>
+
+        <button id="saveContactsBtn" class="btn btn-save">
+          💾 Save Contacts
+        </button>
+      </section>
+
+      <!-- Self-Defense Tips -->
+      <section class="card">
+        <div class="tips-header">
+          <h2>Self-Defense Tips</h2>
+          <button id="readTipsBtn" class="btn btn-read-tips">
+            🔊 Read Tips Aloud
+          </button>
+        </div>
+        <p class="helper-text">
+          These tips are for awareness only. Your safety is the first priority.
+        </p>
+
+        <ol class="tips-list">
+          <li>
+            <strong>Stay aware of your surroundings</strong><br />
+            Avoid walking with full-volume earphones in lonely areas. Keep your
+            phone charged and notice exits, people and lighting around you.
+          </li>
+          <li>
+            <strong>Trust your instincts</strong><br />
+            If a situation or person feels unsafe, move away as soon as
+            possible. You don’t need to be “polite” when your safety is at risk.
+          </li>
+          <li>
+            <strong>Keep your emergency tools ready</strong><br />
+            Keep your phone accessible, SafeHer open, and if it is legal in your
+            area, carry a simple self-defense tool like a whistle.
+          </li>
+          <li>
+            <strong>Use your voice</strong><br />
+            Shout loudly for help, say “No, stop!” confidently and move towards
+            people or lighted areas.
+          </li>
+          <li>
+            <strong>Basic physical defense</strong><br />
+            If you must defend yourself, target sensitive areas like eyes, nose,
+            throat and groin. Then get away and seek help immediately.
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Designed and developed by
+      <span class="lavanya">Lavanya Naik</span>.
+    </footer>
+  </div>
+
+  <!-- Siren audio -->
+  <audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<footer class="footer elite-footer">
+  Designed &amp; Developed by 
+  <span class="elite-name">THE ELITE SEVEN</span>
+</footer>
