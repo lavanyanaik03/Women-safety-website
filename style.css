@@ -1,0 +1,335 @@
+/* Global layout -------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #ffe8ff 0, #ffeef2 40%, #f3f7ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  color: #2a2455;
+}
+
+/* When screen-blink is ON */
+body.blink-mode {
+  animation: screenBlink 0.5s infinite alternate;
+}
+
+@keyframes screenBlink {
+  from {
+    background: #000;
+  }
+  to {
+    background: #ffb3c6;
+  }
+}
+
+/* App shell ------------------------------------------------------ */
+
+.app-shell {
+  width: 100%;
+  max-width: 430px;
+  margin: 16px;
+  padding: 18px 16px 30px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 40px rgba(161, 113, 181, 0.35);
+  backdrop-filter: blur(16px);
+}
+
+/* Header --------------------------------------------------------- */
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-wrap {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, #ffe2ff 0, #ffd6f9 40%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounceLogo 2.2s ease-in-out infinite;
+}
+
+.logo {
+  width: 78%;
+  height: auto;
+  border-radius: 50%;
+}
+
+@keyframes bounceLogo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.02);
+  }
+}
+
+.app-title {
+  margin-top: 8px;
+  font-size: 1.9rem;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  font-weight: 700;
+  color: #29214b;
+}
+
+.tagline {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #5e538a;
+}
+
+.byline {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #6b5c95;
+}
+
+.lavanya {
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #c6417b;
+}
+
+.status {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #7b6cad;
+  min-height: 1.2em;
+}
+
+/* Cards ---------------------------------------------------------- */
+
+.card {
+  background: linear-gradient(135deg, #fefbff, #f8f4ff);
+  border-radius: 20px;
+  padding: 16px 14px 18px;
+  box-shadow: 0 10px 24px rgba(156, 123, 187, 0.23);
+  margin-bottom: 18px;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.helper-text {
+  font-size: 0.88rem;
+  color: #7668a0;
+  margin-bottom: 10px;
+}
+
+/* Buttons -------------------------------------------------------- */
+
+.button-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 11px 14px;
+  border-radius: 999px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(131, 104, 185, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 3px 10px rgba(131, 104, 185, 0.4);
+  filter: brightness(0.97);
+}
+
+.btn-sos {
+  background: linear-gradient(135deg, #ff6a6a, #ff9a6a);
+}
+
+.btn-voice-sos {
+  background: linear-gradient(135deg, #9c7bff, #b584ff);
+}
+
+.btn-screen-flash {
+  background: linear-gradient(135deg, #ffd66a, #ffc46a);
+  color: #5a390b;
+}
+
+.btn-torch-flash {
+  background: linear-gradient(135deg, #ffb347, #ff7a47);
+  color: #4a2600;
+}
+
+.btn-siren {
+  background: linear-gradient(135deg, #ff4b8a, #ff7eb3);
+}
+
+.btn-location {
+  background: linear-gradient(135deg, #4ea6ff, #73ceff);
+}
+
+.btn-police {
+  background: linear-gradient(135deg, #ff5f93, #ff7d7d);
+}
+
+.btn-save {
+  margin-top: 12px;
+  background: linear-gradient(135deg, #30cfd0, #39f3ff);
+}
+
+.voice-toggle-wrap {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.btn-voice-toggle {
+  width: auto;
+  min-width: 210px;
+  padding-inline: 18px;
+  background: linear-gradient(135deg, #7a5cff, #b794ff);
+}
+
+.tiny-tip {
+  font-size: 0.78rem;
+  color: #8270ad;
+  margin-top: 4px;
+}
+
+/* Contacts ------------------------------------------------------- */
+
+.contact-group {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  padding: 10px 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(203, 182, 240, 0.7);
+}
+
+.contact-group h3 {
+  font-size: 0.96rem;
+  margin-bottom: 5px;
+  color: #423570;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: #6d5b99;
+}
+
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid #d6c6f4;
+  margin-top: 3px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: #a37bff;
+  box-shadow: 0 0 0 2px rgba(163, 123, 255, 0.25);
+}
+
+/* Tips ----------------------------------------------------------- */
+
+.tips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.btn-read-tips {
+  width: auto;
+  padding-inline: 14px;
+  font-size: 0.82rem;
+  background: linear-gradient(135deg, #9b7bff, #d08dff);
+}
+
+.tips-list {
+  margin-top: 8px;
+  padding-left: 18px;
+  font-size: 0.9rem;
+  color: #41386c;
+}
+
+.tips-list li + li {
+  margin-top: 7px;
+}
+
+/* Footer --------------------------------------------------------- */
+
+.footer {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #72629a;
+}
+/* ELITE SEVEN Branding */
+.elite-footer {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #7d5fa3;
+  font-weight: 600;
+}
+
+.elite-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff7ac4, #9b6cff, #4fc3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 6px rgba(255, 122, 196, 0.4),
+                 0 0 12px rgba(155, 108, 255, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255, 122, 196, 0.8),
+                 0 0 18px rgba(155, 108, 255, 0.5),
+                 0 0 25px rgba(79, 195, 255, 0.4);
+  }
+  100% {
+    text-shadow: 0 0 6px rgba(255, 122, 196, 0.4),
+                 0 0 12px rgba(155, 108, 255, 0.2);
+  }
+}
