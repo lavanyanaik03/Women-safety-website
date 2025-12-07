@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #ffe6f2, #e5d9ff, #c8e8ff);
+    text-align: center;
+}
+
+/* Logo */
+.logo-container {
+    margin-top: 10px;
+}
+.app-logo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Main Title */
+.title {
+    font-size: 38px;
+    letter-spacing: 6px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Cards */
+.card {
+    background: white;
+    width: 85%;
+    margin: 25px auto;
+    padding: 22px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Buttons */
+.btn {
+    display: block;
+    width: 90%;
+    margin: 12px auto;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0px 1px 2px black;
+    box-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+/* Button Colors */
+.pink { background: linear-gradient(to right, #ff5f9e, #ff7fbf); }
+.purple { background: linear-gradient(to right, #9c6bff, #c29bff); }
+.yellow { background: linear-gradient(to right, #ffd86b, #ffcc00); color:black; text-shadow:none; }
+.orange { background: linear-gradient(to right, #ff9950, #ff6f00); }
+.red { background: linear-gradient(to right, #ff6374, #ff3344); }
+.blue { background: linear-gradient(to right, #66c2ff, #209cff); }
+.red2 { background: linear-gradient(to right, #ff7373, #ff0000); }
+.purple2 { background: linear-gradient(to right, #b07bff, #d6a8ff); }
+.save { background: linear-gradient(to right, #4be3ff, #1ca7d9); }
+.read { background: linear-gradient(to right, #b799ff, #ceadff); }
+
+/* Footer */
+footer {
+    margin: 30px 0;
+    font-size: 16px;
+    color: #444;
+    font-weight: 600;
+}
+
+.lavanya {
+    color: #d60087;
+    font-weight: 700;
+}
