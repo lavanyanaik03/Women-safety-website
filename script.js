@@ -66,30 +66,55 @@ document.head.insertAdjacentHTML("beforeend", `
 }
 </style>`);
 
-// ----------------------- CAMERA FLASH -----------------------
-document.getElementById("cameraFlashBtn").onclick = async () => {
+//---------------------------------
+// CAMERA FLASH (TORCH) ALERT
+//---------------------------------
+let torchStream;
+let torchTrack;
+let torchOn = false;
+
+async function toggleTorchFlash() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { torch: true }});
-        const track = stream.getVideoTracks()[0];
+        if (!torchOn) {
+            // Turn ON
+            torchStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: "environment", torch: true }
+            });
 
-        speak("Camera flash blinking.");
-        let on = true;
+            torchTrack = torchStream.getVideoTracks()[0];
 
-        const flashInterval = setInterval(async () => {
-            await track.applyConstraints({ advanced: [{ torch: on }]});
-            on = !on;
-        }, 200);
+            // Blink effect
+            blinkTorch();
 
-        setTimeout(() => {
-            clearInterval(flashInterval);
-            track.stop();
-            speak("Camera flash stopped.");
-        }, 5000);
+            torchOn = true;
+            speakEnabled("Camera flash alert activated.");
 
-    } catch (e) {
-        alert("Flashlight not supported on this device.");
+        } else {
+            // Turn OFF
+            torchOn = false;
+            if (torchStream) {
+                torchStream.getTracks().forEach(t => t.stop());
+                torchStream = null;
+                torchTrack = null;
+            }
+
+            speakEnabled("Camera flash alert stopped.");
+        }
+    } catch (err) {
+        alert("Flashlight is not supported on your device or browser.");
+        console.error(err);
     }
-};
+}
+
+async function blinkTorch() {
+    while (torchOn && torchTrack) {
+        await torchTrack.applyConstraints({ advanced: [{ torch: true }] });
+        await new Promise(r => setTimeout(r, 200));
+
+        await torchTrack.applyConstraints({ advanced: [{ torch: false }] });
+        await new Promise(r => setTimeout(r, 200));
+    }
+}
 
 // ----------------------- SIREN -----------------------
 const siren = document.getElementById("sirenAudio");
