@@ -180,30 +180,6 @@ function startVoiceSOS() {
   recognition.start();
 }
 
-
-// ========= SCREEN BLINK =========
-function toggleScreenBlink() {
-  const btn = document.getElementById("screenBlinkBtn");
-
-  if (!screenBlinking) {
-    screenBlinking = true;
-    btn.textContent = "💻 Stop Screen Blink";
-
-    screenBlinkInterval = setInterval(() => {
-      screenOverlay.classList.toggle("active");
-    }, 180);
-
-    setStatus("Screen blink alert ON.");
-  } else {
-    screenBlinking = false;
-    clearInterval(screenBlinkInterval);
-    screenOverlay.classList.remove("active");
-    btn.textContent = "💻 Screen Blink Alert";
-    setStatus("Screen blink OFF.");
-  }
-}
-
-
 // ========= PHONE FLASH BLINK (REAL FLASHLIGHT) =========
 async function togglePhoneFlash() {
   const btn = document.getElementById("cameraFlashBtn");
@@ -313,7 +289,6 @@ window.addEventListener("DOMContentLoaded", () => {
   saveContactsBtn.onclick = saveContacts;
   sosBtn.onclick = sendSOS;
   voiceSosBtn.onclick = startVoiceSOS;
-  screenBlinkBtn.onclick = toggleScreenBlink;
   cameraFlashBtn.onclick = togglePhoneFlash;
   sirenBtn.onclick = toggleSiren;
   locationBtn.onclick = shareLocationOnly;
