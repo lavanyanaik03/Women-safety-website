@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Women Safety</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <img src="lavanya-logo.png" class="logo">
+
+  <h1>WOMEN SAFETY</h1>
+
+  <button onclick="sendSOS()">SEND SOS</button>
+  <button onclick="playSiren()">SIREN ALARM</button>
+  <button onclick="toggleFlash()">FLASH BLINK</button>
+  <button onclick="screenBlink()">SCREEN BLINK</button>
+  <button onclick="shareLocation()">SHARE LOCATION</button>
+  <button onclick="readTips()">SELF DEFENCE TIPS</button>
+
+  <div class="contacts">
+    <h3>Emergency Contact</h3>
+    <input id="contactName" placeholder="Name (Mom / Dad)">
+    <input id="contactPhone" placeholder="Phone (with country code)">
+    <button onclick="saveContact()">SAVE CONTACT</button>
+  </div>
+
+  <p class="footer">Designed and Developed by <b>THE ELITE SEVEN</b></p>
+
+</div>
+
+<div id="blink"></div>
+
+<audio id="siren" src="siren.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
