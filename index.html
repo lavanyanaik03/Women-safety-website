@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Women Safety</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Women Safety</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="app">
+<div class="container">
 
-  <img src="lavanya-logo.png" class="logo">
+  <p class="credit-top">Designed & Developed by <b>THE ELITE SEVEN</b></p>
 
-  <h1>WOMEN SAFETY</h1>
+  <img src="lavanya-logo.png" class="logo" alt="Women Safety Logo">
 
-  <button onclick="sendSOS()">SEND SOS</button>
-  <button onclick="playSiren()">SIREN ALARM</button>
-  <button onclick="toggleFlash()">FLASH BLINK</button>
-  <button onclick="screenBlink()">SCREEN BLINK</button>
-  <button onclick="shareLocation()">SHARE LOCATION</button>
-  <button onclick="readTips()">SELF DEFENCE TIPS</button>
+  <h1>SAFEHER</h1>
+  <p class="tagline">Your Personal Women’s Safety Companion</p>
 
-  <div class="contacts">
-    <h3>Emergency Contact</h3>
-    <input id="contactName" placeholder="Name (Mom / Dad)">
-    <input id="contactPhone" placeholder="Phone (with country code)">
-    <button onclick="saveContact()">SAVE CONTACT</button>
+  <div class="actions">
+    <button class="btn sos" onclick="sendSOS()">⚠️ Send SOS (WhatsApp)</button>
+    <button class="btn voice" onclick="voiceSOS()">🎤 Voice SOS (Say "Help Me")</button>
+    <button class="btn screen" onclick="toggleScreenBlink()">🖥 Screen Blink</button>
+    <button class="btn flash" onclick="cameraFlash()">🔦 Camera Flash</button>
+    <button class="btn siren" onclick="playSiren()">🔊 Siren Alarm</button>
+    <button class="btn location" onclick="shareLocation()">📍 Share Location</button>
+    <button class="btn tips" onclick="readTips()">🛡 Self Defence Tips</button>
+    <button class="btn guide" onclick="toggleVoiceGuide()">🔊 Voice Guide: ON</button>
   </div>
 
-  <p class="footer">Designed and Developed by <b>THE ELITE SEVEN</b></p>
+  <footer>
+    Designed & Developed by <b>THE ELITE SEVEN</b>
+  </footer>
 
 </div>
 
-<div id="blink"></div>
-
-<audio id="siren" src="siren.mp3"></audio>
-
+<audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
 <script src="script.js"></script>
+
 </body>
 </html>
