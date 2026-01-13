@@ -1,65 +1,91 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #fbd3e9, #c6d9ff);
+* {
+  box-sizing: border-box;
 }
 
-.app {
-  max-width: 360px;
-  margin: 20px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 20px;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f6c1e8, #c9c9ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+  background: #ffffff;
+  width: 92%;
+  max-width: 380px;
+  border-radius: 25px;
+  padding: 25px;
   text-align: center;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+}
+
+.credit-top {
+  font-size: 12px;
+  color: #8a2be2;
+  margin-bottom: 10px;
 }
 
 .logo {
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  margin: 10px auto;
   animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
 }
 
 h1 {
-  color: #6a1b9a;
+  margin: 10px 0 5px;
+  color: #5a189a;
+  letter-spacing: 2px;
 }
 
-button {
-  width: 100%;
-  margin: 8px 0;
+.tagline {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
   padding: 14px;
   border: none;
   border-radius: 30px;
-  font-size: 16px;
   color: white;
-  background: linear-gradient(90deg,#ff5f9e,#8a5cff);
-  box-shadow: 0 0 12px rgba(255,105,180,0.6);
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(255,255,255,0.8);
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
-.contacts input {
-  width: 100%;
-  margin: 6px 0;
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 30px rgba(255,255,255,1);
 }
 
-.footer {
-  margin-top: 15px;
-  font-size: 14px;
-}
+.sos { background: linear-gradient(90deg, #ff4d6d, #ff758f); }
+.voice { background: linear-gradient(90deg, #7b2cbf, #c77dff); }
+.screen { background: linear-gradient(90deg, #ffd166, #fca311); }
+.flash { background: linear-gradient(90deg, #ff9f1c, #ffbf69); }
+.siren { background: linear-gradient(90deg, #ef233c, #ff595e); }
+.location { background: linear-gradient(90deg, #00b4d8, #48cae4); }
+.tips { background: linear-gradient(90deg, #6a4c93, #9d4edd); }
+.guide { background: linear-gradient(90deg, #4cc9f0, #4895ef); }
 
-#blink {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  opacity: 0;
-  pointer-events: none;
+footer {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #444;
 }
