@@ -1,112 +1,98 @@
-let flashStream = null;
-let flashOn = false;
+let voiceGuide = true;
+let screenBlinking = false;
+let blinkInterval;
 
+/* Voice function */
 function speak(text) {
+  if (!voiceGuide) return;
   const msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "en-IN";
   msg.rate = 0.9;
-  msg.pitch = 1.2;
-  window.speechSynthesis.speak(msg);
+  speechSynthesis.speak(msg);
 }
 
-/* SAVE CONTACT */
-function saveContact() {
-  localStorage.setItem("name", contactName.value);
-  localStorage.setItem("phone", contactPhone.value);
-  speak("Emergency contact saved");
-}
-
-/* SEND SOS */
+/* SOS */
 function sendSOS() {
-  const phone = localStorage.getItem("phone");
-  if (!phone) {
-    alert("Save contact first");
-    return;
-  }
+  speak("Emergency SOS activated");
 
   navigator.geolocation.getCurrentPosition(pos => {
-    const msg =
-      "EMERGENCY! I am in danger.\n" +
-      "My live location:\n" +
-      "https://maps.google.com/?q=" +
-      pos.coords.latitude + "," +
-      pos.coords.longitude;
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+
+    const message =
+`🚨 EMERGENCY 🚨
+I am in danger. Please help me immediately.
+My live location:
+https://maps.google.com/?q=${lat},${lon}`;
 
     window.open(
-      "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg)
+      `https://wa.me/?text=${encodeURIComponent(message)}`,
+      "_blank"
     );
   });
-
-  speak("Emergency message sent");
 }
 
-/* SIREN */
-function playSiren() {
-  const siren = document.getElementById("siren");
-  siren.loop = true;
-  siren.play();
-  speak("Siren activated");
+/* Voice SOS */
+function voiceSOS() {
+  speak("Voice SOS activated. Say help me loudly to get attention.");
+  alert("Shout HELP ME loudly to alert people nearby.");
 }
 
-/* FLASH BLINK */
-async function toggleFlash() {
-  try {
-    if (!flashOn) {
-      flashStream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "environment", torch: true }
-      });
-      const track = flashStream.getVideoTracks()[0];
-      flashOn = true;
-
-      const blink = setInterval(() => {
-        track.applyConstraints({ advanced: [{ torch: true }] });
-        setTimeout(() => {
-          track.applyConstraints({ advanced: [{ torch: false }] });
-        }, 300);
-      }, 600);
-
-      track.onended = () => clearInterval(blink);
-      speak("Flash blinking");
-
-    } else {
-      flashStream.getTracks().forEach(t => t.stop());
-      flashOn = false;
-      speak("Flash stopped");
-    }
-  } catch {
-    alert("Flash not supported on this device");
+/* Screen Blink */
+function toggleScreenBlink() {
+  if (!screenBlinking) {
+    speak("Screen blinking activated");
+    screenBlinking = true;
+    blinkInterval = setInterval(() => {
+      document.body.style.background =
+        document.body.style.background === "black" ? "white" : "black";
+    }, 300);
+  } else {
+    speak("Screen blinking stopped");
+    clearInterval(blinkInterval);
+    screenBlinking = false;
+    document.body.style.background =
+      "linear-gradient(135deg, #f6c1e8, #c9c9ff)";
   }
 }
 
-/* SCREEN BLINK */
-function screenBlink() {
-  const b = document.getElementById("blink");
-  let i = 0;
-  const interval = setInterval(() => {
-    b.style.opacity = i % 2 === 0 ? "1" : "0";
-    i++;
-    if (i > 6) {
-      clearInterval(interval);
-      b.style.opacity = "0";
-    }
-  }, 300);
-  speak("Screen blinking");
+/* Camera Flash (browser limitation explained) */
+function cameraFlash() {
+  speak("Camera flash cannot be controlled by browser due to security restrictions");
+  alert("⚠️ Phone flashlight control is not allowed in browsers.\nUse Screen Blink or Siren for attention.");
 }
 
-/* SHARE LOCATION */
+/* Siren */
+function playSiren() {
+  speak("Siren alarm activated");
+  const siren = document.getElementById("sirenAudio");
+  siren.loop = true;
+  siren.play();
+}
+
+/* Location only */
 function shareLocation() {
-  navigator.geolocation.getCurrentPosition(pos => {
-    const link = "https://maps.google.com/?q=" +
-      pos.coords.latitude + "," +
-      pos.coords.longitude;
-    window.open(link);
-  });
   speak("Sharing location");
+  navigator.geolocation.getCurrentPosition(pos => {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    window.open(`https://maps.google.com/?q=${lat},${lon}`, "_blank");
+  });
 }
 
-/* DEFENCE TIPS */
+/* Tips */
 function readTips() {
-  speak(
-    "Stay alert. Trust your instincts. Keep emergency tools ready. " +
-    "Use your voice loudly. Target eyes, nose, throat or groin and escape."
-  );
+  const tips =
+`Stay aware of your surroundings.
+Trust your instincts.
+Keep emergency tools ready.
+Use your voice loudly.
+Target eyes, nose, throat or groin and escape.`;
+  speak(tips);
+}
+
+/* Voice Guide Toggle */
+function toggleVoiceGuide() {
+  voiceGuide = !voiceGuide;
+  alert("Voice Guide " + (voiceGuide ? "ON" : "OFF"));
 }
