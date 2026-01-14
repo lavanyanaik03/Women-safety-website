@@ -1,32 +1,43 @@
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  background: linear-gradient(135deg,#fbc2eb,#a6c1ee);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow-x: hidden;
 }
 
-.app {
-  background: white;
-  padding: 25px;
-  width: 90%;
-  max-width: 360px;
-  border-radius: 22px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
+.splash-logo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  animation: bounce 2s infinite;
+}
+
+/* HOME */
+.app {
+  padding: 25px;
+  max-width: 380px;
+  margin: auto;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
 .logo {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
+  width: 140px;
   border-radius: 50%;
   animation: bounce 2s infinite;
 }
@@ -36,44 +47,52 @@ body {
   50% { transform: translateY(-12px); }
 }
 
-h1 {
-  color: #6a1b9a;
-  margin: 15px 0;
+h1 { color:#6a1b9a; }
+.tagline { color:#555; }
+
+.card {
+  background: white;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
 }
 
+/* INPUT */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+/* NEON BUTTONS */
 button {
   width: 100%;
-  margin: 10px 0;
   padding: 14px;
-  border: none;
+  margin: 10px 0;
   border-radius: 30px;
-  font-size: 16px;
+  border: none;
   font-weight: bold;
+  font-size: 16px;
   color: white;
-  background: linear-gradient(90deg,#ff5f9e,#7b5cff);
-  box-shadow: 0 0 18px rgba(255,95,158,0.7);
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
-button:active {
-  transform: scale(0.95);
+.neon {
+  box-shadow: 0 0 20px currentColor;
 }
 
-.hidden {
-  display: none;
-}
-
-#tipsBox {
-  text-align: left;
-  margin-top: 10px;
-  padding: 10px;
-  background: #f7f0ff;
-  border-radius: 12px;
-}
+.pink { background:#ff5f9e; color:#ff5f9e; }
+.purple { background:#7b5cff; color:#7b5cff; }
+.yellow { background:#fbc02d; color:#fbc02d; }
+.orange { background:#ff8f00; color:#ff8f00; }
+.red { background:#e53935; color:#e53935; }
+.blue { background:#1e88e5; color:#1e88e5; }
+.green { background:#43a047; color:#43a047; }
 
 footer {
-  margin-top: 15px;
+  margin: 25px 0;
   font-size: 14px;
-  color: #444;
 }
