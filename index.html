@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Women Safety | THE ELITE SEVEN</title>
+  <title>Women Safety App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
 <!-- SPLASH SCREEN -->
@@ -16,41 +15,31 @@
 </div>
 
 <!-- MAIN APP -->
-<div id="app" class="hidden">
-
+<div id="app" style="display:none;">
   <div class="card">
-    <img src="lavanya-logo.png" class="logo-small" />
 
+    <img src="lavanya-logo.png" class="logo-small" />
     <h1>WOMEN SAFETY</h1>
 
-    <button class="btn sos" onclick="sendSOS()">🚨 SEND SOS</button>
-    <button class="btn siren" onclick="playSiren()">🔊 SIREN ALARM</button>
-    <button class="btn flash" onclick="flashBlink()">🔦 FLASH BLINK</button>
-    <button class="btn screen" onclick="screenBlink()">✨ SCREEN BLINK</button>
-    <button class="btn location" onclick="shareLocation()">📍 SHARE LOCATION</button>
-    <button class="btn fake" onclick="fakeCall()">📞 FAKE CALL</button>
+    <button onclick="sendSOS()">🚨 SEND SOS</button>
+    <button onclick="playSiren()">🔊 SIREN ALARM</button>
+    <button onclick="flashBlink()">🔦 FLASH BLINK</button>
+    <button onclick="screenBlink()">💡 SCREEN BLINK</button>
+    <button onclick="shareLocation()">📍 SHARE LOCATION</button>
+    <button onclick="readTips()">🛡 SELF DEFENCE TIPS</button>
 
-    <h3>Emergency Contacts</h3>
-    <input id="dad" placeholder="Dad WhatsApp Number" />
-    <input id="mom" placeholder="Mom WhatsApp Number" />
-    <input id="bro" placeholder="Brother / Sister Number" />
-    <button class="btn save" onclick="saveContacts()">💾 SAVE CONTACTS</button>
-
-    <h3>Self Defence Tips</h3>
-    <ul id="tips">
-      <li>Hit vulnerable areas like eyes, nose, groin.</li>
-      <li>Shout loudly to attract attention.</li>
-      <li>Run towards crowded areas.</li>
-      <li>Trust your instincts.</li>
-      <li>Use nearby objects for defence.</li>
-    </ul>
-    <button class="btn voice" onclick="readTips()">🗣 READ TIPS</button>
-
-    <button class="btn toggle" onclick="toggleVoice()">🎧 VOICE GUIDE: <span id="voiceState">ON</span></button>
+    <div class="tips" id="tips">
+      <h3>Self Defence Tips</h3>
+      <ul>
+        <li>Trust your instincts</li>
+        <li>Target groin, eyes, nose</li>
+        <li>Shout loudly and attract attention</li>
+        <li>Run to safe crowded places</li>
+      </ul>
+    </div>
 
     <footer>Designed & Developed by <b>THE ELITE SEVEN</b></footer>
   </div>
-
 </div>
 
 <audio id="siren" src="siren.mp3"></audio>
