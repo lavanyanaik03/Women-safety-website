@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Women Safety</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
-  <p class="credit-top">Designed & Developed by <b>THE ELITE SEVEN</b></p>
+  <img src="lavanya-logo.png" class="logo" alt="logo" />
 
-  <img src="lavanya-logo.png" class="logo" alt="Women Safety Logo">
+  <h1>WOMEN SAFETY</h1>
 
-  <h1>SAFEHER</h1>
-  <p class="tagline">Your Personal Women’s Safety Companion</p>
+  <button id="sosBtn">🚨 SEND SOS</button>
+  <button id="sirenBtn">🔊 SIREN ALARM</button>
+  <button id="screenBlinkBtn">💡 SCREEN BLINK</button>
+  <button id="locationBtn">📍 SHARE LOCATION</button>
+  <button id="tipsBtn">🛡 SELF DEFENCE TIPS</button>
 
-  <div class="actions">
-    <button class="btn sos" onclick="sendSOS()">⚠️ Send SOS (WhatsApp)</button>
-    <button class="btn voice" onclick="voiceSOS()">🎤 Voice SOS (Say "Help Me")</button>
-    <button class="btn screen" onclick="toggleScreenBlink()">🖥 Screen Blink</button>
-    <button class="btn flash" onclick="cameraFlash()">🔦 Camera Flash</button>
-    <button class="btn siren" onclick="playSiren()">🔊 Siren Alarm</button>
-    <button class="btn location" onclick="shareLocation()">📍 Share Location</button>
-    <button class="btn tips" onclick="readTips()">🛡 Self Defence Tips</button>
-    <button class="btn guide" onclick="toggleVoiceGuide()">🔊 Voice Guide: ON</button>
+  <div id="tipsBox" class="hidden">
+    <ul>
+      <li>Stay aware of your surroundings</li>
+      <li>Trust your instincts</li>
+      <li>Keep emergency contacts ready</li>
+      <li>Use your voice loudly</li>
+      <li>Target eyes, nose, throat or groin and escape</li>
+    </ul>
   </div>
 
   <footer>
-    Designed & Developed by <b>THE ELITE SEVEN</b>
+    Designed and Developed by <b>THE ELITE SEVEN</b>
   </footer>
 
 </div>
 
-<audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
+<audio id="sirenAudio" src="siren.mp3"></audio>
 <script src="script.js"></script>
-
 </body>
 </html>
