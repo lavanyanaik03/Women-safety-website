@@ -1,84 +1,325 @@
-let voiceOn = true;
-let flashOn = false;
-let stream = null;
+// ========= GLOBAL STATE =========
 
-// SPLASH → HOME
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-    document.getElementById("app").style.display = "block";
-    speak("Welcome. Stay safe. Emergency features ready.");
-  }, 2500);
-};
+let voiceGuideEnabled = true;
+let screenBlinking = false;
+let screenBlinkInterval = null;
 
-// VOICE
+let torchStream = null;
+let torchTrack = null;
+let torchBlinking = false;
+let torchInterval = null;
+
+let sirenPlaying = false;
+
+const statusText = document.getElementById("statusText");
+const screenOverlay = document.getElementById("screenFlashOverlay");
+const sirenAudio = document.getElementById("sirenAudio");
+
+
+// ========= VOICE / STATUS SPEAK =========
+function setStatus(msg) {
+  if (statusText) statusText.textContent = msg;
+  speak(msg);
+}
+
 function speak(text) {
-  if (!voiceOn) return;
-  speechSynthesis.cancel();
-  let msg = new SpeechSynthesisUtterance(text);
-  msg.rate = 0.9;
-  msg.pitch = 1.2;
-  speechSynthesis.speak(msg);
+  if (!voiceGuideEnabled) return;
+  if (!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = "en-IN";
+  utt.rate = 1;
+  window.speechSynthesis.speak(utt);
 }
 
-// SOS
-function sendSOS() {
-  speak("Emergency SOS sent");
-  navigator.geolocation.getCurrentPosition(pos => {
-    const link = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
-    const msg = `HELP ME I'M IN DANGER 🚨\nI need help immediately.\nLocation: ${link}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+
+// ========= CONTACT MANAGEMENT =========
+function loadContacts() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("safeherContacts"));
+    if (saved) {
+      document.getElementById("c1Name").value = saved.c1Name || "";
+      document.getElementById("c1Phone").value = saved.c1Phone || "";
+      document.getElementById("c2Name").value = saved.c2Name || "";
+      document.getElementById("c2Phone").value = saved.c2Phone || "";
+      document.getElementById("c3Name").value = saved.c3Name || "";
+      document.getElementById("c3Phone").value = saved.c3Phone || "";
+    }
+  } catch (e) {
+    console.error("Load failed", e);
+  }
+}
+
+function saveContacts() {
+  const data = {
+    c1Name: c1Name.value.trim(),
+    c1Phone: c1Phone.value.trim(),
+    c2Name: c2Name.value.trim(),
+    c2Phone: c2Phone.value.trim(),
+    c3Name: c3Name.value.trim(),
+    c3Phone: c3Phone.value.trim()
+  };
+
+  localStorage.setItem("safeherContacts", JSON.stringify(data));
+  setStatus("Contacts saved successfully.");
+}
+
+
+// ========= LOCATION HELPERS =========
+function getPosition() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject("Geolocation not supported");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: true,
+      timeout: 10000
+    });
   });
 }
 
-// LOCATION
-function shareLocation() {
-  speak("Sharing location");
-  navigator.geolocation.getCurrentPosition(pos => {
-    const link = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(link)}`);
-  });
+function waLink(phone, msg) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
 }
 
-// SIREN
-function playSiren() {
-  speak("Siren activated");
-  document.getElementById("siren").play();
+
+// ========= SEND SOS =========
+async function sendSOS() {
+  const saved = JSON.parse(localStorage.getItem("safeherContacts") || "{}");
+  const phone = saved.c1Phone;
+
+  if (!phone) {
+    alert("Save Contact 1 (Dad) first!");
+    return;
+  }
+
+  setStatus("Preparing SOS with your live location…");
+
+  let base = "🚨 EMERGENCY! I am in danger. Please help immediately.";
+
+  try {
+    const pos = await getPosition();
+    const { latitude, longitude } = pos.coords;
+    base += `\n\n📍 Location: https://maps.google.com/?q=${latitude},${longitude}`;
+  } catch {
+    base += "\n\n❗Could not attach GPS location.";
+  }
+
+  window.open(waLink(phone, base), "_blank");
+  setStatus("SOS sent to your primary contact.");
 }
 
-// SCREEN BLINK
-function screenBlink() {
-  speak("Screen blinking");
-  let count = 0;
-  const blink = setInterval(() => {
-    document.body.style.background = count % 2 ? "#ffd6e8" : "#ffffff";
-    count++;
-    if (count > 6) clearInterval(blink);
-  }, 300);
+
+// ========= SHARE LOCATION =========
+async function shareLocationOnly() {
+  const saved = JSON.parse(localStorage.getItem("safeherContacts") || "{}");
+  const phone = saved.c1Phone;
+
+  if (!phone) {
+    alert("Save Contact 1 first!");
+    return;
+  }
+
+  setStatus("Fetching your location…");
+
+  try {
+    const pos = await getPosition();
+    const { latitude, longitude } = pos.coords;
+
+    const msg = `📍 My location: https://maps.google.com/?q=${latitude},${longitude}`;
+    window.open(waLink(phone, msg), "_blank");
+
+    setStatus("Location sent.");
+  } catch {
+    alert("Unable to fetch location.");
+    setStatus("Failed to fetch location.");
+  }
 }
 
-// FLASH BLINK (mobile only)
-async function flashBlink() {
-  speak("Flash blinking");
-  if (!stream) {
-    stream = await navigator.mediaDevices.getUserMedia({
+
+// ========= VOICE SOS (help me) =========
+
+let recognition = null;
+
+function setupVoiceRecognition() {
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRec) {
+    voiceSosBtn.textContent = "🎤 Voice SOS not supported";
+    voiceSosBtn.disabled = true;
+    return;
+  }
+
+  recognition = new SpeechRec();
+  recognition.lang = "en-IN";
+
+  recognition.onresult = (e) => {
+    const text = e.results[0][0].transcript.toLowerCase();
+    console.log("Heard:", text);
+
+    if (text.includes("help me") || text.includes("help")) {
+      setStatus('Voice command detected: "help me". Sending SOS.');
+      sendSOS();
+    } else {
+      setStatus("Voice heard but not recognized as SOS.");
+    }
+  };
+
+  recognition.onerror = () => setStatus("Voice SOS error.");
+}
+
+function startVoiceSOS() {
+  if (!recognition) {
+    alert("Voice recognition not supported.");
+    return;
+  }
+  setStatus("Listening… say 'help me'.");
+  recognition.start();
+}
+
+
+// ========= SCREEN BLINK =========
+function toggleScreenBlink() {
+  const btn = document.getElementById("screenBlinkBtn");
+
+  if (!screenBlinking) {
+    screenBlinking = true;
+    btn.textContent = "💻 Stop Screen Blink";
+
+    screenBlinkInterval = setInterval(() => {
+      screenOverlay.classList.toggle("active");
+    }, 180);
+
+    setStatus("Screen blink alert ON.");
+  } else {
+    screenBlinking = false;
+    clearInterval(screenBlinkInterval);
+    screenOverlay.classList.remove("active");
+    btn.textContent = "💻 Screen Blink Alert";
+    setStatus("Screen blink OFF.");
+  }
+}
+
+
+// ========= PHONE FLASH BLINK (REAL FLASHLIGHT) =========
+async function togglePhoneFlash() {
+  const btn = document.getElementById("cameraFlashBtn");
+
+  // TURN OFF
+  if (torchBlinking) {
+    torchBlinking = false;
+    clearInterval(torchInterval);
+
+    try {
+      await torchTrack.applyConstraints({ advanced: [{ torch: false }] });
+    } catch {}
+
+    if (torchStream) {
+      torchStream.getTracks().forEach(t => t.stop());
+    }
+
+    torchStream = null;
+    torchTrack = null;
+
+    btn.textContent = "📸 Phone Flash Blink";
+    setStatus("Phone flashlight stopped.");
+    return;
+  }
+
+  // TURN ON
+  try {
+    torchStream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: "environment" }
     });
+
+    torchTrack = torchStream.getVideoTracks()[0];
+    let on = false;
+
+    torchBlinking = true;
+
+    torchInterval = setInterval(async () => {
+      on = !on;
+      try {
+        await torchTrack.applyConstraints({ advanced: [{ torch: on }] });
+      } catch (e) {
+        console.log("Torch toggle error", e);
+      }
+    }, 200);
+
+    btn.textContent = "📸 Stop Flash Blink";
+    setStatus("Phone flashlight blinking ON.");
+
+  } catch (e) {
+    alert("Torch not supported on this device.");
+    setStatus("Flashlight not supported.");
   }
-  const track = stream.getVideoTracks()[0];
-  const imageCapture = new ImageCapture(track);
-  let on = false;
-  let i = 0;
-
-  const blink = setInterval(() => {
-    track.applyConstraints({ advanced: [{ torch: on }] });
-    on = !on;
-    i++;
-    if (i > 6) clearInterval(blink);
-  }, 300);
 }
 
-// DEFENCE TIPS
+
+// ========= SIREN =========
+function toggleSiren() {
+  if (!sirenPlaying) {
+    sirenAudio.currentTime = 0;
+    sirenAudio.play();
+    sirenPlaying = true;
+    sirenBtn.textContent = "📢 Stop Siren Alarm";
+    setStatus("Siren ON.");
+  } else {
+    sirenAudio.pause();
+    sirenPlaying = false;
+    sirenBtn.textContent = "📢 Siren Alarm";
+    setStatus("Siren OFF.");
+  }
+}
+
+
+// ========= POLICE CALL =========
+function callPolice() {
+  window.location.href = "tel:112";
+  setStatus("Calling police emergency number.");
+}
+
+
+// ========= VOICE GUIDE =========
+function toggleVoiceGuide() {
+  voiceGuideEnabled = !voiceGuideEnabled;
+  voiceToggleBtn.textContent =
+    voiceGuideEnabled ? "🔊 Voice Guide: ON" : "🔇 Voice Guide: OFF";
+  setStatus(
+    voiceGuideEnabled ? "Voice guide ON." : "Voice guide OFF."
+  );
+}
+
+
+// ========= READ TIPS =========
 function readTips() {
-  speak("Self defence tips. Trust your instincts. Target groin eyes nose. Shout loudly. Run to safe places.");
+  const items = document.querySelectorAll("#tipsList li");
+  const text = Array.from(items)
+    .map((li, i) => `Tip ${i + 1}. ${li.textContent}`)
+    .join(" ");
+  setStatus("Reading tips…");
+  speak(text);
 }
+
+
+// ========= INIT =========
+window.addEventListener("DOMContentLoaded", () => {
+  loadContacts();
+  setupVoiceRecognition();
+
+  saveContactsBtn.onclick = saveContacts;
+  sosBtn.onclick = sendSOS;
+  voiceSosBtn.onclick = startVoiceSOS;
+  screenBlinkBtn.onclick = toggleScreenBlink;
+  cameraFlashBtn.onclick = togglePhoneFlash;
+  sirenBtn.onclick = toggleSiren;
+  locationBtn.onclick = shareLocationOnly;
+  policeBtn.onclick = callPolice;
+  voiceToggleBtn.onclick = toggleVoiceGuide;
+  readTipsBtn.onclick = readTips;
+
+  setStatus("Welcome to SafeHer. Save your contacts and stay safe.");
+});
