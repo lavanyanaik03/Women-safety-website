@@ -2,48 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Women Safety App</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
+  <title>SafeHer – Women Safety Companion</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="page">
+    <!-- Top credit -->
+    <p class="credit">
+      Designed &amp; Developed by
+      <span class="lavanya">LAVANYA NAIK</span>
+    </p>
 
-<!-- SPLASH SCREEN -->
-<div id="splash">
-  <img src="lavanya-logo.png" class="logo-bounce" />
-  <h2>WOMEN SAFETY APP</h2>
-</div>
+    <!-- Logo + title -->
+    <header class="header">
+      <div class="logo-wrap bounce">
+        <img src="lavanya-logo.png" alt="SafeHer Logo" class="logo" />
+      </div>
+      <h1 class="app-title">SAFEHER</h1>
+      <p class="tagline">Your Personal Women’s Safety Companion</p>
+    </header>
 
-<!-- MAIN APP -->
-<div id="app" style="display:none;">
-  <div class="card">
+    <!-- Quick Actions -->
+    <section class="card">
+      <h2>Quick Actions</h2>
 
-    <img src="lavanya-logo.png" class="logo-small" />
-    <h1>WOMEN SAFETY</h1>
+      <button id="sosBtn" class="btn">
+        ⚠️ Send SOS (WhatsApp)
+      </button>
 
-    <button onclick="sendSOS()">🚨 SEND SOS</button>
-    <button onclick="playSiren()">🔊 SIREN ALARM</button>
-    <button onclick="flashBlink()">🔦 FLASH BLINK</button>
-    <button onclick="screenBlink()">💡 SCREEN BLINK</button>
-    <button onclick="shareLocation()">📍 SHARE LOCATION</button>
-    <button onclick="readTips()">🛡 SELF DEFENCE TIPS</button>
+      <button id="voiceSosBtn" class="btn">
+        🎙️ Voice SOS (say “help me”)
+      </button>
 
-    <div class="tips" id="tips">
-      <h3>Self Defence Tips</h3>
-      <ul>
-        <li>Trust your instincts</li>
-        <li>Target groin, eyes, nose</li>
-        <li>Shout loudly and attract attention</li>
-        <li>Run to safe crowded places</li>
+      <button id="screenBlinkBtn" class="btn">
+        💻 Screen Blink Alert
+      </button>
+
+      <button id="cameraFlashBtn" class="btn">
+        📸 Camera Flash Alert
+      </button>
+
+      <button id="sirenBtn" class="btn">
+        📢 Siren Alarm
+      </button>
+
+      <button id="locationBtn" class="btn">
+        📍 Share Location
+      </button>
+
+      <button id="policeBtn" class="btn">
+        🚓 Call Police (112)
+      </button>
+
+      <button id="voiceToggleBtn" class="btn secondary">
+        🔊 Voice Guide: ON
+      </button>
+
+      <p id="statusText" class="status-text">
+        Welcome to SafeHer. Save your emergency contacts below.
+      </p>
+    </section>
+
+    <!-- Emergency Contacts -->
+    <section class="card">
+      <h2>Emergency Contacts</h2>
+      <p class="card-subtext">
+        Save important numbers so your SOS and location can reach them quickly.
+      </p>
+
+      <!-- Contact 1 -->
+      <div class="contact-block">
+        <h3>Contact 1 (Primary – Dad)</h3>
+        <label for="c1Name">Name</label>
+        <input id="c1Name" type="text" placeholder="e.g., Dad" />
+        <label for="c1Phone">Phone (with country code)</label>
+        <input id="c1Phone" type="tel" placeholder="e.g., 9198xxxxxxx" />
+      </div>
+
+      <!-- Contact 2 -->
+      <div class="contact-block">
+        <h3>Contact 2 (Mom)</h3>
+        <label for="c2Name">Name</label>
+        <input id="c2Name" type="text" placeholder="e.g., Mom" />
+        <label for="c2Phone">Phone (with country code)</label>
+        <input id="c2Phone" type="tel" placeholder="e.g., 9197xxxxxxx" />
+      </div>
+
+      <!-- Contact 3 -->
+      <div class="contact-block">
+        <h3>Contact 3 (Brother / Sister)</h3>
+        <label for="c3Name">Name</label>
+        <input id="c3Name" type="text" placeholder="e.g., Brother / Sister" />
+        <label for="c3Phone">Phone (with country code)</label>
+        <input id="c3Phone" type="tel" placeholder="e.g., 9199xxxxxxx" />
+      </div>
+
+      <button id="saveContactsBtn" class="btn secondary">
+        💾 Save Contacts
+      </button>
+    </section>
+
+    <!-- Self-Defense Tips -->
+    <section class="card">
+      <h2>Self-Defense Tips</h2>
+      <p class="card-subtext">
+        These tips are for awareness only. Your safety is the first priority.
+      </p>
+
+      <ul id="tipsList" class="tips-list">
+        <li>
+          Stay aware of your surroundings. Avoid walking with full-volume
+          earphones in lonely areas. Keep your phone charged and notice exits,
+          people and lighting around you.
+        </li>
+        <li>
+          Trust your instincts. If a situation or person feels unsafe, move away
+          as soon as possible. You don’t need to be “polite” when your safety is
+          at risk.
+        </li>
+        <li>
+          Keep your emergency tools ready. Keep your phone accessible, SafeHer
+          open, and if it is legal in your area, carry a simple self-defense
+          tool like a whistle.
+        </li>
+        <li>
+          Use your voice loudly. Shout for help, say “No, stop!” confidently and
+          try to move towards people or lighted areas.
+        </li>
+        <li>
+          Basic physical defense: target sensitive areas like eyes, nose,
+          throat, groin and escape immediately. Seek help right away.
+        </li>
       </ul>
-    </div>
 
-    <footer>Designed & Developed by <b>THE ELITE SEVEN</b></footer>
+      <button id="readTipsBtn" class="btn secondary">
+        📖 Read Tips Aloud
+      </button>
+    </section>
+
+    <!-- Screen blink overlay -->
+    <div id="screenFlashOverlay"></div>
+
+    <!-- Bottom credit -->
+    <footer class="footer">
+      Designed &amp; Developed by
+      <span class="lavanya">LAVANYA NAIK</span>
+    </footer>
   </div>
-</div>
 
-<audio id="siren" src="siren.mp3"></audio>
+  <!-- Siren audio -->
+  <audio id="sirenAudio" src="siren.mp3" preload="auto" loop></audio>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
