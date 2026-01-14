@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Women Safety</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>SAFEHER – Women Safety</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <img src="lavanya-logo.png" class="logo">
+</div>
 
-  <img src="lavanya-logo.png" class="logo" alt="logo" />
+<!-- MAIN APP -->
+<div id="app" class="hidden">
 
-  <h1>WOMEN SAFETY</h1>
+  <img src="lavanya-logo.png" class="logo small">
 
-  <button id="sosBtn">🚨 SEND SOS</button>
-  <button id="sirenBtn">🔊 SIREN ALARM</button>
-  <button id="screenBlinkBtn">💡 SCREEN BLINK</button>
-  <button id="locationBtn">📍 SHARE LOCATION</button>
-  <button id="tipsBtn">🛡 SELF DEFENCE TIPS</button>
+  <h1>SAFEHER</h1>
 
-  <div id="tipsBox" class="hidden">
+  <button class="btn sos" onclick="sendSOS()">🚨 SEND SOS</button>
+  <button class="btn" onclick="playSiren()">🔊 SIREN ALARM</button>
+  <button class="btn" onclick="screenBlink()">💡 SCREEN BLINK</button>
+  <button class="btn" onclick="shareLocation()">📍 SHARE LOCATION</button>
+  <button class="btn" onclick="toggleNight()">🌙 NIGHT MODE</button>
+  <button class="btn" onclick="toggleVoice()">🔊 VOICE GUIDE ON / OFF</button>
+
+  <!-- EMERGENCY CONTACTS -->
+  <div class="card">
+    <h2>Emergency Contacts</h2>
+    <input id="dad" placeholder="Dad Phone Number">
+    <input id="mom" placeholder="Mom Phone Number">
+    <input id="sib" placeholder="Brother / Sister Phone Number">
+    <button class="btn save" onclick="saveContacts()">💾 SAVE CONTACTS</button>
+  </div>
+
+  <!-- SELF DEFENCE -->
+  <div class="card">
+    <h2>Self Defence Tips</h2>
     <ul>
-      <li>Stay aware of your surroundings</li>
+      <li>Stay aware of surroundings</li>
       <li>Trust your instincts</li>
-      <li>Keep emergency contacts ready</li>
       <li>Use your voice loudly</li>
-      <li>Target eyes, nose, throat or groin and escape</li>
+      <li>Target eyes, nose, throat or groin</li>
+      <li>Run to a safe place immediately</li>
     </ul>
+    <button class="btn" onclick="readTips()">🔊 READ TIPS ALOUD</button>
   </div>
 
   <footer>
@@ -35,7 +55,8 @@
 
 </div>
 
-<audio id="sirenAudio" src="siren.mp3"></audio>
+<audio id="siren" src="siren.mp3"></audio>
 <script src="script.js"></script>
+
 </body>
 </html>
