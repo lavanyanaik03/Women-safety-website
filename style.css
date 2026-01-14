@@ -1,65 +1,104 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #FADADD, #E6D9FF);
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
-.app {
-  background: white;
-  padding: 25px;
-  width: 90%;
-  max-width: 360px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+.hidden { display: none; }
+
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #FADADD, #E6D9FF);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .logo {
-  width: 120px;
+  width: 150px;
   border-radius: 50%;
   animation: bounce 2s infinite;
 }
 
+.logo.small {
+  width: 120px;
+}
+
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-12px); }
 }
 
-h1 {
-  color: #6a1b9a;
+#app {
+  background: white;
+  width: 90%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
 }
 
-button {
+h1 { color: #5A189A; }
+
+.btn {
   width: 100%;
-  margin: 10px 0;
   padding: 14px;
+  margin: 10px 0;
   border: none;
   border-radius: 30px;
   font-size: 16px;
   color: white;
-  background: linear-gradient(90deg,#ff5f9e,#7b5cff);
-  box-shadow: 0 0 15px rgba(255,95,158,0.6);
+  background: linear-gradient(90deg, #FF6FB1, #8B5CF6);
+  box-shadow: 0 0 18px rgba(255,111,177,0.6);
   cursor: pointer;
 }
 
-button:hover {
-  transform: scale(1.05);
+.sos {
+  background: linear-gradient(90deg, #FF4D6D, #FF758F);
 }
 
-.hidden {
-  display: none;
+.save {
+  background: linear-gradient(90deg, #22C55E, #16A34A);
 }
 
-#tipsBox {
-  text-align: left;
-  margin-top: 10px;
+.card {
+  background: #F7F4FF;
+  padding: 15px;
+  border-radius: 20px;
+  margin-top: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 }
 
 footer {
   margin-top: 15px;
   font-size: 14px;
+}
+
+/* NIGHT MODE */
+body.dark {
+  background: linear-gradient(135deg, #0F172A, #1E293B);
+}
+
+body.dark #app {
+  background: #020617;
+  color: white;
+}
+
+body.dark .card {
+  background: #1E293B;
 }
