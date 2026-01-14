@@ -1,82 +1,111 @@
-const siren = document.getElementById("sirenAudio");
-
-/* SPLASH → HOME */
-setTimeout(() => {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("home").classList.remove("hidden");
-}, 4000);
-
-/* SPEAK (female if possible) */
-function speak(text) {
-  const u = new SpeechSynthesisUtterance(text);
-  const voices = speechSynthesis.getVoices();
-  const female = voices.find(v => v.name.toLowerCase().includes("female"));
-  if (female) u.voice = female;
-  speechSynthesis.speak(u);
+* {
+  box-sizing: border-box;
 }
 
-/* SAVE CONTACTS */
-document.getElementById("saveContacts").onclick = () => {
-  localStorage.setItem("c1", c1.value);
-  localStorage.setItem("c2", c2.value);
-  localStorage.setItem("c3", c3.value);
-  speak("Emergency contacts saved");
-};
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  height: 100vh;
+}
 
-/* SOS */
-document.getElementById("sosBtn").onclick = () => {
-  speak("Emergency S O S activated");
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
 
-  navigator.geolocation.getCurrentPosition(pos => {
-    const msg =
-      "🚨 HELP ME I'M IN DANGER 🚨\n" +
-      "I need immediate help.\n" +
-      "My location:\n" +
-      `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+.splash-logo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: white;
+  padding: 12px;
+  animation: bounce 2s infinite;
+}
 
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
-  });
-};
+/* MAIN APP */
+.hidden {
+  display: none;
+}
 
-/* VOICE SOS */
-document.getElementById("voiceSosBtn").onclick = () => {
-  speak("Say help me to activate SOS");
-};
+#app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* SCREEN BLINK */
-document.getElementById("screenBlinkBtn").onclick = () => {
-  let count = 0;
-  const bg = document.body.style.background;
-  const blink = setInterval(() => {
-    document.body.style.background = count % 2 ? "red" : "white";
-    count++;
-    if (count > 8) {
-      clearInterval(blink);
-      document.body.style.background = bg;
-    }
-  }, 200);
-};
+.app-card {
+  background: white;
+  width: 100%;
+  max-width: 390px;
+  padding: 25px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
 
-/* FLASH (LIMITATION NOTICE) */
-document.getElementById("flashBtn").onclick = () => {
-  speak("Phone flash works only in mobile apps");
-};
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: white;
+  padding: 8px;
+  animation: bounce 2s infinite;
+}
 
-/* SIREN */
-document.getElementById("sirenBtn").onclick = () => {
-  siren.currentTime = 0;
-  siren.play();
-  speak("Siren activated");
-};
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
-/* LOCATION */
-document.getElementById("locationBtn").onclick = () => {
-  navigator.geolocation.getCurrentPosition(pos => {
-    window.open(`https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`);
-  });
-};
+h1 {
+  margin: 10px 0 4px;
+  color: #6a1b9a;
+}
 
-/* READ TIPS */
-document.getElementById("readTips").onclick = () => {
-  speak(document.getElementById("tips").innerText);
-};
+.tagline {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* NEON BUTTONS */
+button {
+  width: 100%;
+  margin: 10px 0;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(90deg, #ff5f9e, #7b5cff);
+  box-shadow:
+    0 0 10px rgba(255,95,158,0.8),
+    0 0 20px rgba(123,92,255,0.6);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+#tipsBox {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+footer {
+  margin-top: 15px;
+  font-size: 13px;
+}
