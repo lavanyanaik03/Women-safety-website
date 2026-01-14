@@ -1,92 +1,100 @@
 let voiceOn = true;
-let night = false;
+let synth = window.speechSynthesis;
+
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("splash").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+  }, 2500);
+
+  loadContacts();
+};
 
 function speak(text) {
   if (!voiceOn) return;
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.rate = 0.9;
-  speechSynthesis.speak(msg);
+  let msg = new SpeechSynthesisUtterance(text);
+  msg.rate = 0.95;
+  msg.pitch = 1.2;
+  synth.speak(msg);
 }
 
-/* SPLASH */
-setTimeout(() => {
-  document.getElementById("splash").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-}, 2500);
-
-/* SAVE CONTACTS */
+/* CONTACTS */
 function saveContacts() {
   localStorage.setItem("dad", dad.value);
   localStorage.setItem("mom", mom.value);
-  localStorage.setItem("sib", sib.value);
+  localStorage.setItem("bro", bro.value);
   speak("Emergency contacts saved");
+}
+
+function loadContacts() {
+  dad.value = localStorage.getItem("dad") || "";
+  mom.value = localStorage.getItem("mom") || "";
+  bro.value = localStorage.getItem("bro") || "";
 }
 
 /* SOS */
 function sendSOS() {
-  const msg = `🚨 HELP ME! I'M IN DANGER 🚨
-
-Dad or Mom, I need help immediately.
-
-📍 My live location:
-`;
+  speak("Sending emergency SOS");
   navigator.geolocation.getCurrentPosition(pos => {
-    const link = msg +
-      `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+    let lat = pos.coords.latitude;
+    let lon = pos.coords.longitude;
+    let msg = `HELP ME I'M IN DANGER 🚨
+Dad / Mom please help me immediately.
+My location: https://maps.google.com/?q=${lat},${lon}`;
 
-    [localStorage.getItem("dad"),
-     localStorage.getItem("mom"),
-     localStorage.getItem("sib")]
-    .filter(Boolean)
-    .forEach(p =>
-      window.open(`https://wa.me/${p}?text=${encodeURIComponent(link)}`)
-    );
-  });
-  speak("Emergency message and location sent");
-}
-
-/* SIREN */
-function playSiren() {
-  siren.play();
-  speak("Siren activated");
-}
-
-/* SCREEN BLINK */
-function screenBlink() {
-  let i = 0;
-  const blink = setInterval(() => {
-    document.body.style.background = i % 2 ? "black" : "white";
-    i++;
-    if (i > 10) {
-      clearInterval(blink);
-      document.body.style.background = "";
+    let num = localStorage.getItem("dad");
+    if (num) {
+      window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`);
     }
-  }, 200);
-  speak("Screen alert activated");
+  });
 }
 
 /* LOCATION */
 function shareLocation() {
+  speak("Sharing location");
   navigator.geolocation.getCurrentPosition(pos => {
-    window.open(`https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`);
+    let link = `https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+    alert("Location: " + link);
   });
-  speak("Location shared");
 }
 
-/* NIGHT MODE */
-function toggleNight() {
-  night = !night;
-  document.body.classList.toggle("dark");
-  speak(night ? "Night mode on" : "Night mode off");
+/* SIREN */
+function playSiren() {
+  speak("Siren activated");
+  document.getElementById("siren").play();
 }
 
-/* VOICE TOGGLE */
+/* SCREEN BLINK */
+function screenBlink() {
+  speak("Screen blink activated");
+  let i = 0;
+  let interval = setInterval(() => {
+    document.body.style.background =
+      i % 2 ? "#000" : "linear-gradient(135deg,#f9d5ec,#d6e6ff)";
+    i++;
+    if (i > 10) clearInterval(interval);
+  }, 300);
+}
+
+/* FLASH (SIMULATED) */
+function flashBlink() {
+  speak("Flash blinking");
+  alert("Flash blinking (browser demo mode)");
+}
+
+/* FAKE CALL */
+function fakeCall() {
+  speak("Incoming call");
+  alert("Fake Call Incoming 📞");
+}
+
+/* VOICE GUIDE */
 function toggleVoice() {
   voiceOn = !voiceOn;
-  alert("Voice guide " + (voiceOn ? "ON" : "OFF"));
+  document.getElementById("voiceState").innerText = voiceOn ? "ON" : "OFF";
 }
 
-/* READ TIPS */
+/* DEFENCE TIPS */
 function readTips() {
-  speak("Stay alert. Trust your instincts. Use your voice loudly. Target eyes, nose, throat or groin and escape.");
+  speak(document.getElementById("tips").innerText);
 }
