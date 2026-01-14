@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>SafeHer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
@@ -10,52 +10,42 @@
 
 <!-- SPLASH SCREEN -->
 <div id="splash">
-  <img src="lavanya-logo.png" class="splash-logo">
+  <img src="lavanya-logo.png" class="splash-logo" alt="logo">
 </div>
 
-<!-- HOME -->
-<div class="app hidden" id="home">
+<!-- MAIN APP -->
+<div id="app" class="hidden">
 
-  <img src="lavanya-logo.png" class="logo">
+  <div class="app-card">
+    <img src="lavanya-logo.png" class="logo" alt="logo">
 
-  <h1>SAFEHER</h1>
-  <p class="tagline">Your Personal Women’s Safety Companion</p>
+    <h1>SAFEHER</h1>
+    <p class="tagline">Your Personal Women’s Safety Companion</p>
 
-  <button id="sosBtn" class="neon pink">🚨 Send SOS (WhatsApp)</button>
-  <button id="voiceSosBtn" class="neon purple">🎤 Voice SOS (“help me”)</button>
-  <button id="screenBlinkBtn" class="neon yellow">💡 Screen Blink Alert</button>
-  <button id="flashBtn" class="neon orange">📸 Phone Flash Blink</button>
-  <button id="sirenBtn" class="neon red">🔊 Siren Alarm</button>
-  <button id="locationBtn" class="neon blue">📍 Share Location</button>
+    <button id="sosBtn">🚨 Send SOS (WhatsApp)</button>
+    <button id="sirenBtn">🔊 Siren Alarm</button>
+    <button id="screenBlinkBtn">💡 Screen Blink</button>
+    <button id="locationBtn">📍 Share Location</button>
+    <button id="tipsBtn">🛡 Self Defense Tips</button>
 
-  <!-- EMERGENCY CONTACTS -->
-  <div class="card">
-    <h2>Emergency Contacts</h2>
+    <div id="tipsBox" class="hidden">
+      <ul>
+        <li>Stay aware of your surroundings</li>
+        <li>Trust your instincts</li>
+        <li>Keep emergency tools ready</li>
+        <li>Use your voice loudly</li>
+        <li>Target eyes, nose, throat or groin and escape</li>
+      </ul>
+    </div>
 
-    <input id="c1" placeholder="Dad Phone (with code)">
-    <input id="c2" placeholder="Mom Phone (with code)">
-    <input id="c3" placeholder="Brother/Sister Phone">
-
-    <button id="saveContacts" class="neon green">💾 Save Contacts</button>
+    <footer>
+      Designed and Developed by <b>THE ELITE SEVEN</b>
+    </footer>
   </div>
 
-  <!-- SELF DEFENCE -->
-  <div class="card">
-    <h2>Self-Defense Tips</h2>
-    <ul id="tips">
-      <li>Stay aware of your surroundings</li>
-      <li>Trust your instincts</li>
-      <li>Keep emergency tools ready</li>
-      <li>Use your voice loudly</li>
-      <li>Target eyes, nose, throat or groin and escape</li>
-    </ul>
-    <button id="readTips" class="neon blue">📖 Read Tips Aloud</button>
-  </div>
-
-  <footer>Designed & Developed by <b>THE ELITE SEVEN</b></footer>
 </div>
 
-<audio id="sirenAudio" src="siren.mp3" preload="auto"></audio>
+<audio id="sirenAudio" src="siren.mp3"></audio>
 <script src="script.js"></script>
 </body>
 </html>
