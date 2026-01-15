@@ -200,15 +200,15 @@ input {
   position: fixed;
   inset: 0;
   background: rgba(255, 255, 255, 0);
-  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  pointer-events: none;
+  transition: background 0.2s ease, opacity 0.2s ease;
   z-index: 9999;
 }
 
 #screenFlashOverlay.active {
-  pointer-events: none;
   opacity: 1;
+  background: rgba(255, 0, 80, 0.6); /* pastel red blink */
 }
 
 /* Footer already styled above */
