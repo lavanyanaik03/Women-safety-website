@@ -1,51 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>SafeHer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <title>Women Safety</title>  
+  <link rel="stylesheet" href="style.css" />  
+</head>  
+<body>  <div class="app">    <img src="lavanya-logo.png" class="logo" alt="logo" />    <h1>WOMEN SAFETY</h1>  <button id="sosBtn">🚨 SEND SOS</button>
+<button id="sirenBtn">🔊 SIREN ALARM</button>
+<button id="screenBlinkBtn">💡 SCREEN BLINK</button>
+<button id="locationBtn">📍 SHARE LOCATION</button>
+<button id="tipsBtn">🛡 SELF DEFENCE TIPS</button>
 
-<!-- SPLASH SCREEN -->
-<div id="splash">
-  <img src="lavanya-logo.png" class="splash-logo" alt="logo">
-</div>
+  <div id="tipsBox" class="hidden">  
+    <ul>  
+      <li>Stay aware of your surroundings</li>  
+      <li>Trust your instincts</li>  
+      <li>Keep emergency contacts ready</li>  
+      <li>Use your voice loudly</li>  
+      <li>Target eyes, nose, throat or groin and escape</li>  
+    </ul>  
+  </div>    <footer>  
+    Designed and Developed by <b>THE ELITE SEVEN</b>  
+  </footer>  </div>  <audio id="sirenAudio" src="siren.mp3"></audio>
 
-<!-- MAIN APP -->
-<div id="app" class="hidden">
-
-  <div class="app-card">
-    <img src="lavanya-logo.png" class="logo" alt="logo">
-
-    <h1>SAFEHER</h1>
-    <p class="tagline">Your Personal Women’s Safety Companion</p>
-
-    <button id="sosBtn">🚨 Send SOS (WhatsApp)</button>
-    <button id="sirenBtn">🔊 Siren Alarm</button>
-    <button id="screenBlinkBtn">💡 Screen Blink</button>
-    <button id="locationBtn">📍 Share Location</button>
-    <button id="tipsBtn">🛡 Self Defense Tips</button>
-
-    <div id="tipsBox" class="hidden">
-      <ul>
-        <li>Stay aware of your surroundings</li>
-        <li>Trust your instincts</li>
-        <li>Keep emergency tools ready</li>
-        <li>Use your voice loudly</li>
-        <li>Target eyes, nose, throat or groin and escape</li>
-      </ul>
-    </div>
-
-    <footer>
-      Designed and Developed by <b>THE ELITE SEVEN</b>
-    </footer>
-  </div>
-
-</div>
-
-<audio id="sirenAudio" src="siren.mp3"></audio>
-<script src="script.js"></script>
-</body>
+<script src="script.js"></script>  </body>  
 </html>
