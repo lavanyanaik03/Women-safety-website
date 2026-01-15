@@ -1,111 +1,65 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-  height: 100vh;
+margin: 0;
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
-/* SPLASH */
-#splash {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.splash-logo {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: white;
-  padding: 12px;
-  animation: bounce 2s infinite;
-}
-
-/* MAIN APP */
-.hidden {
-  display: none;
-}
-
-#app {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.app-card {
-  background: white;
-  width: 100%;
-  max-width: 390px;
-  padding: 25px;
-  border-radius: 22px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+.app {
+background: white;
+padding: 25px;
+width: 90%;
+max-width: 360px;
+border-radius: 20px;
+text-align: center;
+box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
 .logo {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: white;
-  padding: 8px;
-  animation: bounce 2s infinite;
+width: 120px;
+border-radius: 50%;
+animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+0%,100% { transform: translateY(0); }
+50% { transform: translateY(-10px); }
 }
 
 h1 {
-  margin: 10px 0 4px;
-  color: #6a1b9a;
+color: #6a1b9a;
 }
 
-.tagline {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-/* NEON BUTTONS */
 button {
-  width: 100%;
-  margin: 10px 0;
-  padding: 14px;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  color: white;
-  background: linear-gradient(90deg, #ff5f9e, #7b5cff);
-  box-shadow:
-    0 0 10px rgba(255,95,158,0.8),
-    0 0 20px rgba(123,92,255,0.6);
-  cursor: pointer;
-  transition: transform 0.2s;
+width: 100%;
+margin: 10px 0;
+padding: 14px;
+border: none;
+border-radius: 30px;
+font-size: 16px;
+color: white;
+background: linear-gradient(90deg,#ff5f9e,#7b5cff);
+box-shadow: 0 0 15px rgba(255,95,158,0.6);
+cursor: pointer;
 }
 
-button:active {
-  transform: scale(0.96);
+button:hover {
+transform: scale(1.05);
+}
+
+.hidden {
+display: none;
 }
 
 #tipsBox {
-  text-align: left;
-  margin-top: 10px;
-  font-size: 14px;
+text-align: left;
+margin-top: 10px;
 }
 
 footer {
-  margin-top: 15px;
-  font-size: 13px;
+margin-top: 15px;
+font-size: 14px;
 }
