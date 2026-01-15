@@ -193,7 +193,7 @@ function toggleScreenBlink() {
       screenOverlay.classList.toggle("active");
     }, 180);
 
-    setStatus("Screen blink alert ON.");
+    setStatus("Screen blink ON.");
   } else {
     screenBlinking = false;
     clearInterval(screenBlinkInterval);
